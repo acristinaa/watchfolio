@@ -1,12 +1,13 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { TMDB_IMAGE_BASE } from "@/lib/validations/env";
 
-// shadcn's cn() helper, merges Tailwind classes safely
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function formatDate(dateString: string): string {
+  if (!dateString) return "Unknown date";
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -19,5 +20,16 @@ export function getTMDBImageUrl(
   size: "w200" | "w300" | "w500" | "original" = "w300",
 ): string {
   if (!path) return "/placeholder-poster.png";
-  return `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE ?? "https://image.tmdb.org/t/p"}/${size}${path}`;
+  return `${TMDB_IMAGE_BASE}/${size}${path}`;
+}
+
+export function formatRuntime(minutes: number | null): string {
+  if (!minutes) return "Unknown";
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+export function formatVoteAverage(vote: number): string {
+  return vote.toFixed(1);
 }

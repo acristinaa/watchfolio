@@ -14,10 +14,11 @@ const parsed = envSchema.safeParse({
 
 if (!parsed.success) {
   console.error(
-    "Invalid environment variables:",
+    "nvalid environment variables:",
     parsed.error.flatten().fieldErrors,
   );
-  throw new Error("Invalid environment variables. Check .env.local");
+  throw new Error("Invalid environment variables");
 }
 
 export const env = parsed.data;
+export const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
