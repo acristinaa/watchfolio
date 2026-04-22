@@ -11,6 +11,7 @@ import {
 } from "@/lib/utils";
 import { isMovie } from "@/lib/tmdb/types";
 import type { Metadata } from "next";
+import { WatchlistButton } from "@/components/watchlist/watchlist-button";
 
 interface Props {
   params: Promise<{ type: string; id: string }>;
@@ -131,6 +132,13 @@ export default async function MediaDetailPage({ params }: Props) {
               </Badge>
             ))}
           </div>
+
+          <WatchlistButton
+            tmdbId={media.id}
+            mediaType={type}
+            title={title}
+            posterPath={media.poster_path}
+          />
 
           {media.overview && (
             <div>
