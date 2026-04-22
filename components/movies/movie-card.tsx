@@ -9,7 +9,6 @@ import {
   type TMDBTVShow,
   getMediaTitle,
   getMediaDate,
-  isMovie,
 } from "@/lib/tmdb/types";
 
 interface MovieCardProps {
@@ -28,7 +27,7 @@ export function MovieCard({ media, mediaType }: MovieCardProps) {
       href={href}
       className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
       <Card className="overflow-hidden transition-all duration-200 group-hover:shadow-lg group-hover:-translate-y-1">
-        <div className="relative aspect-[2/3] bg-muted">
+        <div className="relative aspect-2/3 bg-muted">
           <Image
             src={getTMDBImageUrl(media.poster_path, "w300")}
             alt={`${title} poster`}

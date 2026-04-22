@@ -42,7 +42,13 @@ export function RecentActivity({ entries }: RecentActivityProps) {
                 src={getTMDBImageUrl(entry.poster_path, "w200")}
                 alt={`${entry.title} poster`}
                 fill
+                sizes="32px"
                 className="object-cover"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = "none";
+                }}
               />
             </div>
             <div className="flex-1 min-w-0">

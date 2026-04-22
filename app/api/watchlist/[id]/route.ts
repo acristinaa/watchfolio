@@ -3,10 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { updateWatchlistSchema } from "@/lib/validations/watchlist";
 
 interface Params {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function PATCH(request: NextRequest, { params }: Params) {
+  const { id } = await params;
   const supabase = await createClient();
   const {
     data: { user },
@@ -29,7 +30,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
   const { data, error } = await supabase
     .from("watchlist")
     .update(parsed.data)
-    .eq("id", params.id)
+    .eq("id", id)
     .eq("user_id", user.id) // RLS double-check
     .select()
     .single();
@@ -42,6 +43,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 }
 
 export async function DELETE(_request: NextRequest, { params }: Params) {
+  const { id } = await params;
   const supabase = await createClient();
   const {
     data: { user },
@@ -54,7 +56,7 @@ export async function DELETE(_request: NextRequest, { params }: Params) {
   const { error } = await supabase
     .from("watchlist")
     .delete()
-    .eq("id", params.id)
+    .eq("id", id)
     .eq("user_id", user.id);
 
   if (error) {
