@@ -22,6 +22,8 @@ A personal movie and TV show tracker. Search for content via the TMDB API, manag
 
 ---
 
+### Architectural decisions
+
 - **Dual state management:** React Query handles all server-synced data (watchlist, search results) with caching and optimistic updates. Zustand manages transient UI state (dialogs, notifications) that doesn't need to persist.
 - **Supabase SSR:** Sessions are managed server-side via `@supabase/ssr`. Middleware enforces auth on all `/dashboard`, `/search`, and `/watchlist` routes before the page renders — client-side guards alone are not relied upon.
 - **API route layer:** Watchlist mutations go through Next.js API routes rather than calling Supabase directly from the client. This keeps RLS enforcement server-side and centralises input validation via Zod.
