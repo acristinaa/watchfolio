@@ -16,9 +16,6 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-4 text-center">
-      <div className="text-6xl" aria-hidden="true">
-        💥
-      </div>
       <div>
         <h1 className="text-2xl font-bold">Something went wrong</h1>
         <p className="mt-2 text-muted-foreground max-w-md">
